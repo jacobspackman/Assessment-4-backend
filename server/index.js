@@ -3,18 +3,18 @@ const cors = require("cors");
 
 const app = express();
 
+app.use(express.json());
 app.use(cors());
 
-app.use(express.json());
+const controller = require('./controller')
+const { getCompliment, getFortune, getInspiration, addInspiration, deleteInspiration, updateInspiration } = controller
 
-const { getCompliment, getFortune, getInspiration, addInspiration, deleteInspiration, updateInspiration } = require('./controller')
-
-app.get("/api/compliment", getCompliment);
-app.get("/api/fortune", getFortune);
-app.get("/api/inspiration", getInspiration);
-app.get("/api/inspiration", addInspiration);
-app.get("/api/inspiration/:id", deleteInspiration);
-app.get("/api/inspiration/:id", updateInspiration);
+app.get("/compliment", getCompliment);
+app.get("/fortune", getFortune);
+app.get("/feelgood", getInspiration);
+app.post("/feelgood", addInspiration);
+app.delete("/feelgood/:id", deleteInspiration);
+app.put("/feelgood/:id", updateInspiration);
 
 
-app.listen(4000, () => console.log("Server running on 4000"));
+app.listen(4005, () => console.log("Server running on 4005"));
